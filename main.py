@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from .crud import create_user, get_user, get_users, update_user, delete_user
-from .models import User
-from .database import engine, SessionLocal
+from crud import create_user, get_user, get_users, update_user, delete_user
+from models import User
+from db_connection import engine, SessionLocal
 
 # Create a FastAPI instance
 app = FastAPI()

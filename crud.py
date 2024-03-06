@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from .models import User, Currency, Transaction
+from models import User, Currency, Transaction
 
 # CRUD operations for users
 def create_user(db: Session, username: str, email: str):
