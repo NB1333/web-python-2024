@@ -1,46 +1,16 @@
-from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.orm import Session
+# This is a sample Python script.
 
-from .crud import create_user, get_user, get_users, update_user, delete_user
-from .models import User
-from .database import engine, SessionLocal
+# Press Shift+F10 to execute it or replace it with your code.
+# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-# Create a FastAPI instance
-app = FastAPI()
 
-# Create database tables
-Base.metadata.create_all(bind=engine)
+def print_hi(name):
+    # Use a breakpoint in the code line below to debug your script.
+    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
-# Dependency to get a database session
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
-# Endpoint to create a new user
-@app.post("/users/", response_model=User)
-def create_user_route(username: str, email: str, db: Session = Depends(get_db)):
-    return create_user(db, username=username, email=email)
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    print_hi('PyCharm')
 
-# Endpoint to retrieve information about a user by ID
-@app.get("/users/{user_id}", response_model=User)
-def read_user(user_id: int, db: Session = Depends(get_db)):
-    return get_user(db, user_id=user_id)
-
-# Endpoint to retrieve a list of users with optional skip and limit parameters
-@app.get("/users/", response_model=list[User])
-def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    return get_users(db, skip=skip, limit=limit)
-
-# Endpoint to update user information
-@app.put("/users/{user_id}", response_model=User)
-def update_user_route(user_id: int, username: str, email: str, db: Session = Depends(get_db)):
-    return update_user(db, user_id=user_id, username=username, email=email)
-
-# Endpoint to delete a user by ID
-@app.delete("/users/{user_id}")
-def delete_user_route(user_id: int, db: Session = Depends(get_db)):
-    delete_user(db, user_id=user_id)
-    return {"message": f"User {user_id} deleted"}
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
